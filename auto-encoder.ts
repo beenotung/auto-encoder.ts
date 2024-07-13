@@ -1,6 +1,7 @@
 const AutoEncoder = require('autoencoder')
 
 export type AutoEncoder = {
+  scale?: boolean
   fit(X: BatchValues, options?: FitOptions): void
   encode(X: BatchValues): BatchValues
   decode(X: BatchValues): BatchValues
@@ -65,5 +66,7 @@ export type LayerOptions = {
 }
 
 export function createAutoEncoder(options: AutoEncoderOptions): AutoEncoder {
-  return new AutoEncoder(options)
+  let autoEncoder = new AutoEncoder(options)
+  autoEncoder.scale = options.scale
+  return autoEncoder
 }
