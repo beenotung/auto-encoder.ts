@@ -2,7 +2,14 @@
   "name": "auto-encoder.ts",
   "version": "1.0.0",
   "description": "A simple Auto Encoder typescript library for experimentation and dimensionality reduction. Supports automatic scaling.",
-  "keywords": [],
+  "keywords": [
+    "auto-encoder",
+    "neural-network",
+    "dimension-reduction",
+    "feature-embedding",
+    "typescript",
+    "autoencoder"
+  ],
   "author": {
     "name": "Beeno Tung",
     "email": "aabbcc1241@yahoo.com.hk",
