@@ -1,6 +1,6 @@
 {
   "name": "auto-encoder.ts",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A simple Auto Encoder typescript library for experimentation and dimensionality reduction. Supports automatic scaling.",
   "keywords": [
     "auto-encoder",
