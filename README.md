@@ -8,12 +8,18 @@ A simple Auto Encoder typescript library for experimentation and dimensionality 
 
 This is a Typescript wrapper on top of [autoencoder](https://github.com/zemlyansky/autoencoder/blob/master/README.md).
 
+With additional helper functions: `exportAutoEncoder(autoEncoder)` and `restoreAutoEncoder(json)`.
+
 ![Auto Encoder Logo](https://github.com/zemlyansky/autoencoder/raw/master/assets/autoencoder.png)
 
 ## Features
 
-- Automatic scaling (can be turned off)
-- Typescript support
+- Build embedding model in self-supervised manner (without manually labelling data)
+- Reduce data dimension based on data distribution
+- Support export/restore with JSON
+- Lightweight (without node-gpy, cmake, python, cuda)
+- Automatic scaling/normalizing (can be turned off)
+- Static Type Checking and Completion with Typescript
 - Isomorphic package: works in Node.js and browsers
 - Works with plain Javascript, Typescript is not mandatory
 
@@ -101,13 +107,30 @@ Try the package in the browser on [StatSim Vis](https://statsim.com/vis). Choose
 Below are the exported function and types:
 
 ```typescript
+import { ActivationFunctionName, OptimizationMethodName } from 'adnn.ts'
+
 function createAutoEncoder(options: AutoEncoderOptions): AutoEncoder
 
-type AutoEncoder = {
+function exportAutoEncoder(autoEncoder: AutoEncoder): AutoEncoderJSON
+
+function restoreAutoEncoder(json: AutoEncoderJSON): AutoEncoder
+
+interface AutoEncoder {
   fit(X: BatchValues, options?: FitOptions): void
   encode(X: BatchValues): BatchValues
   decode(X: BatchValues): BatchValues
+  /** @description Similar to this.decode(this.encode(X)) */
   predict(X: BatchValues): BatchValues
+}
+
+type AutoEncoderJSON = {
+  scale: boolean | undefined
+  max: number[]
+  min: number[]
+  nInputs: number
+  nHidden: number
+  encoder: unknown
+  decoder: unknown
 }
 
 type FitOptions = {
@@ -115,7 +138,7 @@ type FitOptions = {
   batchSize?: number
   /** @default 100 */
   iterations?: number
-  /** @default adagrad */
+  /** @default 'adagrad' */
   method?: OptimizationMethodName
   /** @default 0.05 */
   stepSize?: number
@@ -124,9 +147,6 @@ type FitOptions = {
 type BatchValues = Values[]
 
 type Values = number[]
-
-/** @default available methods in adnn/opt */
-type OptimizationMethodName = 'sgd' | 'adagrad' | 'rmsprop' | 'adam'
 
 type AutoEncoderOptions =
   | {
@@ -154,10 +174,9 @@ type AutoEncoderOptions =
       decoder: LayerOptions[]
     }
 
-type ActivationFunctionName = 'relu' | 'tanh' | 'sigmoid'
-
 type LayerOptions = {
   nOut: number
+  /** @description no activation function in the last layer of decoder gives better result */
   activation?: ActivationFunctionName
 }
 ```
