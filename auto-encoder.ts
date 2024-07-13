@@ -4,6 +4,11 @@ import {
   OptimizationMethodName,
   nn,
 } from 'adnn.ts'
+export {
+  ActivationFunctionName,
+  Network,
+  OptimizationMethodName,
+} from 'adnn.ts'
 
 const AutoEncoder = require('autoencoder')
 
