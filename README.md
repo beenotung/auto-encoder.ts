@@ -158,7 +158,7 @@ type ActivationFunctionName = 'relu' | 'tanh' | 'sigmoid'
 
 type LayerOptions = {
   nOut: number
-  activation: ActivationFunctionName
+  activation?: ActivationFunctionName
 }
 ```
 

@@ -61,7 +61,7 @@ export type ActivationFunctionName = 'relu' | 'tanh' | 'sigmoid'
 
 export type LayerOptions = {
   nOut: number
-  activation: ActivationFunctionName
+  activation?: ActivationFunctionName
 }
 
 export function createAutoEncoder(options: AutoEncoderOptions): AutoEncoder {

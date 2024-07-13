@@ -5,13 +5,26 @@ let X = iris_dataset.data
 
 const autoEncoder = createAutoEncoder({
   nInputs: X[0].length,
-  nHidden: 10,
+  nHidden: 3,
+  activation: 'tanh',
+  // encoder: [
+  //   { nOut: X[0].length, activation: 'tanh' },
+  //   { nOut: 3, activation: 'tanh' },
+  // ],
+  // decoder: [
+  //   { nOut: 3, activation: 'tanh' },
+  //   {
+  //     nOut: X[0].length,
+  //   },
+  // ],
 })
 
 for (let i = 0; i < 50000; i++) {
   autoEncoder.fit(X, {
+    // batchSize: 100,
     iterations: 10000,
-    stepSize: 0.01,
+    // method: 'adagrad',
+    // stepSize: 0.01,
   })
 
   let Y = autoEncoder.predict(X)
