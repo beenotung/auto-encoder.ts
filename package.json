@@ -1,0 +1,30 @@
+{
+  "name": "auto-encoder.ts",
+  "version": "1.0.0",
+  "description": "A simple Auto Encoder typescript library for experimentation and dimensionality reduction. Supports automatic scaling.",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "main": "dist/auto-encoder.js",
+  "types": "dist/auto-encoder.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "tsc --noEmit",
+    "clean": "rimraf dist",
+    "build": "rimraf dist && tsc -p . && rimraf dist/{tsconfig.tsbuildinfo,res,test.*}",
+    "tsc": "tsc -p ."
+  },
+  "dependencies": {
+    "autoencoder": "^0.0.3"
+  },
+  "devDependencies": {
+    "@beenotung/tslib": "^23.7.0",
+    "@types/node": "^20.14.10",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.5.3"
+  }
+}
